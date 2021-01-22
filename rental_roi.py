@@ -1,4 +1,3 @@
-
 class Rental_roi():
 
     def __init__(self, monthly_income=0, monthly_expenses=0, monthly_cf=0, annual_cf=0, 
@@ -11,20 +10,27 @@ class Rental_roi():
         self.coc_roi = coc_roi
 
     def income(self):
-        print('\nThank you for using this rental ROI calculator.')
-        print('\nFirst, let\'s calculate your monthly income.')
+        print('\nWelcome.\n')
+        print('\nTo calculate the return on investment (ROI) for your rental property, let\'s '
+            'first calculate your total monthly income. Please exclude any currency signs in your '
+            'inputs.')
 
         rental_income = int(input('\nWhat is your monthly rental income?\n'))
-        laundry = int(input('\nWhat is your laundry income?\n'))
-        storage = int(input('\nWhat is your storage income?\n'))
-        miscellaneous = int(input('\nWhat is your total miscellaneous income?\n'))
+        other_income = input('\nDo you have any laundry, storage, or miscellaneous expenses? Type '
+            '\'yes\' or \'no\'.\n')
+        if other_income.lower() == 'yes':
+            laundry = int(input('\nWhat is your laundry income?\n'))
+            storage = int(input('\nWhat is your storage income?\n'))
+            miscellaneous = int(input('\nWhat is your total miscellaneous income?\n'))
+        else:
+            laundry, storage, miscellaneous = 0, 0, 0
         
         self.monthly_income = sum([rental_income, laundry, storage, miscellaneous])
         
         print(f'\nYour total monthly income is ${self.monthly_income}.\n')
 
     def expenses(self):
-        print('Now, let\'s calculate your monthly expenses.')
+        print('Now, let\'s calculate your total monthly expenses.')
 
         tax = int(input('\nWhat is your monthly tax expense?\n'))
         insurance = int(input('\nWhat is your monthly insurance expense?\n'))
@@ -38,8 +44,12 @@ class Rental_roi():
         else:
             electricity, water, sewer, garbage, gas = 0, 0, 0, 0, 0
         hoa = int(input('\nWhat is your monthly homeowner\'s association expense?\n'))
-        lawn = int(input('\nWhat is your monthly lawncare expense?\n'))
-        snow = int(input('\nWhat is your monthly snow expense?\n'))
+        lawn_snow = input('\nDo you have any lawncare or snow expenses? Type \'yes\' or \'no\'.\n')
+        if lawn_snow.lower() == 'yes':  
+            lawn = int(input('\nWhat is your monthly lawncare expense?\n'))
+            snow = int(input('\nWhat is your monthly snow expense?\n'))
+        else:
+            lawn, snow = 0, 0
         vacancy = int(input('\nWhat is your monthly vacancy expense?\n'))
         repairs = int(input('\nWhat is your monthly repair expense?\n'))
         capital_exp = int(input('\nWhat is your monthly capital expenditure expense?\n'))
@@ -59,7 +69,7 @@ class Rental_roi():
             f'${self.annual_cf}.')
 
     def cash_on_cash(self):
-        print('\nFinally, let\'s calculate your cash on cash return on investment (ROI).')
+        print('\nFinally, let\'s calculate your cash on cash ROI.')
         print('\nFirst, input your investments.')
 
         down_payment = int(input('\nWhat is your down payment?\n'))
@@ -68,8 +78,9 @@ class Rental_roi():
         misc = int(input('\nWhat are your miscellaneous expenses?\n'))
 
         self.investment = sum([down_payment, closing_costs, rehab, misc])
-        print(f'\nYour total investments are ${self.investment}.')
         self.coc_roi = self.annual_cf / self.investment * 100 
+
+        print(f'\nYour total investments are ${self.investment}.')
         print(f'\nYour cash on cash ROI is {int(self.coc_roi) + round(self.coc_roi % 1, 2)}%.\n')
 
 def rental_roi_calc():
@@ -82,46 +93,3 @@ def rental_roi_calc():
     rental_prop.cash_on_cash()
 
 rental_roi_calc()
-
-
-
-
-# Income
-    # input
-        # rental income
-        # laundry
-        # storage
-        # miscellaneous
-    # output
-        # total monthly income
-
-# Expenses
-    # input
-        # tax
-        # insurance
-        # utilities
-            #electricity, water, sewer, garbage, gas
-        # HOA (Home Owners' Association)
-        # lawn, snow
-        # vacancy
-        # repairs
-        # capital expenses
-        # property management
-        # mortgage
-    # output
-        # total monthly expenses
-
-# Cash Flow
-    # output
-        # total monthly cash flow (income - expenses)
-        # total annual cash flow
-
-# Cash on Cash ROI
-    # input (investments)
-        # down payment
-        # closing costs
-        # rehab budget
-        # miscellaneous other
-    # output
-        # total investment (sum of investments)
-        # cash on cash ROI (annual cash flow/total investment) as %
