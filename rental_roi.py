@@ -100,7 +100,7 @@ class Rental_roi():
 
         print(f'\nYour total monthly income is ${self.monthly_income}.')
         print(f'\nYour total monthly expenses are ${self.monthly_expenses}.')
-        print(f'\nYour total monthly cash flow is ${self.monthly_cf} and your yearly cash flow '
+        print(f'\nYour total monthly cash flow is ${self.monthly_cf} and your annual cash flow '
             f'is ${self.annual_cf}.')
         print(f'\nYour total investments are ${self.investment}.')
         print(f'\nYour cash on cash ROI is {self.coc_roi}%.\n')
@@ -163,19 +163,18 @@ def rental_roi_calc():
         choice = input(
             '\n\t- To edit your inputs, type "edit".'
             '\n\t- To view your recalculated results or to view your results again, type "view".'
-            '\n\t- To exit this program, type "exit".\n\n')
-        choice = choice.lower()
+            '\n\t- To exit this program, type "exit".\n\n').lower()
 
         while choice not in ['view', 'edit', 'exit']:
-             choice = input('\nPlease type "view", "edit", or "exit".\n\n')
+             choice = input('\nPlease type "view", "edit", or "exit".\n\n').lower()
 
-        if choice.lower() == 'view':
+        if choice == 'view':
             rental.view_results()    
         
-        elif choice.lower() == 'edit':
+        elif choice == 'edit':
             rental.edit_input()
 
-        elif choice.lower() == 'exit':
+        elif choice == 'exit':
             break
 
 rental_roi_calc()
