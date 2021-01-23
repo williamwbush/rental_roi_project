@@ -89,7 +89,7 @@ class Rental_roi():
 
         self.investment = sum([down_payment, closing_cost, rehab, misc])
         self.coc_roi = self.annual_cf / self.investment * 100 
-        # change to percent form with two significant digits (excluding percent sign)
+        # change to percent form (excluding percent sign) with two significant digits 
         self.coc_roi = int(self.coc_roi) + round(self.coc_roi % 1, 2)
 
         print(f'\nYour total investments are ${self.investment}.')
