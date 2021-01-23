@@ -177,7 +177,7 @@ def rental_roi_calc():
             '\n\t- To exit this program, type "exit".\n\n').lower()
 
         while choice not in ['view', 'edit', 'exit']:
-             choice = input('\nPlease type "view", "edit", or "exit".\n\n').lower()
+            choice = input('\nPlease type "view", "edit", or "exit".\n\n').lower()
 
         if choice == 'view':
             rental.view_results()    
