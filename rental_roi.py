@@ -9,8 +9,6 @@ class Rental_roi():
         self.investment = investment
         self.coc_roi = coc_roi
 
-
-
     def welcome(self):
         '''Welcome message'''
 
