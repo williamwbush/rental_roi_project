@@ -9,19 +9,7 @@ class Rental_roi():
         self.investment = investment
         self.coc_roi = coc_roi
 
-    def user_prompt(self, input_name:str, input_type:str) -> int:
-        '''
-        Insert input_name and input_type into an input question that asks for a number.
-        Check that the user inputs digits.
-        Output an integer.
-        Example input_name: "laundry", "tax", "miscellaneous".
-        Example input_type: "income", "expenses", "expense total".
-        '''
-        user_input = input(f'\nWhat is your {input_name} {input_type}?\n')
-        while user_input.isdigit() != True:
-            user_input = input('\nPlease enter a number in digit form greater than or equal to '
-                'zero. Please exclude any currency signs or commas.\n')
-        return int(user_input)
+
 
     def welcome(self):
         '''Welcome message'''
@@ -34,13 +22,13 @@ class Rental_roi():
     def income(self):
         '''Ask for sources of income and calculate total income.'''
 
-        rental = self.user_prompt("monthly rental", "income")
+        rental = self.__user_prompt("monthly rental", "income")
         other_income = input('\nDo you have any laundry, storage, or miscellaneous expenses? Type '
             '\'yes\' or \'no\'.\n')
         if other_income.lower() == 'yes':
-            laundry = self.user_prompt("monthly laundry", "income")
-            storage = self.user_prompt("monthly storage", "income")
-            miscellaneous = self.user_prompt("monthly miscellaneous", "income")
+            laundry = self.__user_prompt("monthly laundry", "income")
+            storage = self.__user_prompt("monthly storage", "income")
+            miscellaneous = self.__user_prompt("monthly miscellaneous", "income")
         else:
             laundry, storage, miscellaneous = 0, 0, 0
         
@@ -53,29 +41,29 @@ class Rental_roi():
         
         print('\nLet\'s calculate your total monthly expenses.')
 
-        tax = self.user_prompt('monthly tax', 'expense')
-        insurance = self.user_prompt('monthly insurance', 'expense')
+        tax = self.__user_prompt('monthly tax', 'expense')
+        insurance = self.__user_prompt('monthly insurance', 'expense')
         utilities = input('\nDo you have any utility expenses? Type "yes" or "no".\n')
         if utilities.lower() == 'yes':
-            electricity = self.user_prompt("monthly electricity", "expense")
-            water = self.user_prompt("monthly water", "expense")
-            sewer = self.user_prompt("monthly sewer", "expense")
-            garbage = self.user_prompt("monthly garbage", "expense")
-            gas = self.user_prompt("monthly gas", "expense")
+            electricity = self.__user_prompt("monthly electricity", "expense")
+            water = self.__user_prompt("monthly water", "expense")
+            sewer = self.__user_prompt("monthly sewer", "expense")
+            garbage = self.__user_prompt("monthly garbage", "expense")
+            gas = self.__user_prompt("monthly gas", "expense")
         else:
             electricity, water, sewer, garbage, gas = 0, 0, 0, 0, 0
-        hoa = self.user_prompt("monthly homeowner's association", "expense")
+        hoa = self.__user_prompt("monthly homeowner's association", "expense")
         lawn_snow = input('\nDo you have any lawncare or snow expenses? Type "yes" or "no".\n')
         if lawn_snow.lower() == 'yes':  
-            lawn = self.user_prompt("monthly lawncare", "expense")
-            snow = self.user_prompt("monthly snow", "expense")
+            lawn = self.__user_prompt("monthly lawncare", "expense")
+            snow = self.__user_prompt("monthly snow", "expense")
         else:
             lawn, snow = 0, 0
-        vacancy = self.user_prompt("monthly vacancy", "expense")
-        repairs = self.user_prompt("monthly repairs", "expense")
-        capital_exp = self.user_prompt("monthly capital expenditure", "expense")
-        prop_man = self.user_prompt("monthly property management", "expense")
-        mortgage = self.user_prompt("monthly mortgage", "expense")
+        vacancy = self.__user_prompt("monthly vacancy", "expense")
+        repairs = self.__user_prompt("monthly repairs", "expense")
+        capital_exp = self.__user_prompt("monthly capital expenditure", "expense")
+        prop_man = self.__user_prompt("monthly property management", "expense")
+        mortgage = self.__user_prompt("monthly mortgage", "expense")
         
         self.monthly_expenses = sum([tax, insurance, electricity, water, sewer, garbage, gas, hoa,
             lawn, snow, vacancy, repairs, capital_exp, prop_man, mortgage])
@@ -96,10 +84,10 @@ class Rental_roi():
         
         print('\nLet\'s input your investments.')
 
-        down_payment = self.user_prompt("down", "payment")
-        closing_cost = self.user_prompt("closing", "cost")
-        rehab = self.user_prompt("rehab", "budget")
-        misc = self.user_prompt("total miscellanous", "investment")
+        down_payment = self.__user_prompt("down", "payment")
+        closing_cost = self.__user_prompt("closing", "cost")
+        rehab = self.__user_prompt("rehab", "budget")
+        misc = self.__user_prompt("total miscellanous", "investment")
 
         self.investment = sum([down_payment, closing_cost, rehab, misc])
         self.coc_roi = self.annual_cf / self.investment * 100 
@@ -130,15 +118,29 @@ class Rental_roi():
 
         if choice == 'income':
             self.income()
-            self._recalculate()
+            self.__recalculate()
         elif choice == 'expenses':
             self.expenses()
-            self._recalculate()
+            self.__recalculate()
         elif choice == 'investments':
             self.cash_on_cash()
-            self._recalculate()
+            self.__recalculate()
     
-    def _recalculate(self):
+    def __user_prompt(self, input_name:str, input_type:str) -> int:
+        '''
+        Insert input_name and input_type into an input question that asks for a number.
+        Check that the user inputs digits.
+        Output an integer.
+        Example input_name: "laundry", "tax", "miscellaneous".
+        Example input_type: "income", "expenses", "expense total".
+        '''
+        user_input = input(f'\nWhat is your {input_name} {input_type}?\n')
+        while user_input.isdigit() != True:
+            user_input = input('\nPlease enter a number in digit form greater than or equal to '
+                'zero. Please exclude any currency signs or commas.\n')
+        return int(user_input)
+
+    def __recalculate(self):
         '''Recalculate monthly cash flow, annual cash flow, and cash on cash ROI.'''
 
         self.monthly_cf = self.monthly_income - self.monthly_expenses
@@ -162,7 +164,7 @@ def rental_roi_calc():
     while True:
         choice = input(
             '\n\t- To edit your inputs, type "edit".'
-            '\n\t- To view your new results or to view your results again, type "view".'
+            '\n\t- To view your recalculated results or to view your results again, type "view".'
             '\n\t- To exit this program, type "exit".\n\n')
         choice = choice.lower()
 
