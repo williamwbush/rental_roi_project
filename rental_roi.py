@@ -82,7 +82,7 @@ class Rental_roi():
             '-'*39)
     
     def cash_flow(self):
-        "Calculate total montly cash flow from monthly income and expenses."
+        '''Calculate total montly cash flow from monthly income and expenses.'''
 
         self.monthly_cf = self.monthly_income - self.monthly_expenses
         self.annual_cf = self.monthly_cf * 12
