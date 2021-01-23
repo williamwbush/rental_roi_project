@@ -88,7 +88,7 @@ class Rental_roi():
         self.monthly_cf = self.monthly_income - self.monthly_expenses
         self.annual_cf = self.monthly_cf * 12
         
-        print(f'\nYour total monthly cash flow is ${self.monthly_cf} and your yearly cash flow is '
+        print(f'\nYour total monthly cash flow is ${self.monthly_cf} and your annual cash flow is '
             f'${self.annual_cf}.')
 
     def cash_on_cash(self):
@@ -103,9 +103,11 @@ class Rental_roi():
 
         self.investment = sum([down_payment, closing_cost, rehab, misc])
         self.coc_roi = self.annual_cf / self.investment * 100 
+        # change to percent form with two significant digits (excluding percent sign)
+        self.coc_roi = int(self.coc_roi) + round(self.coc_roi % 1, 2)
 
         print(f'\nYour total investments are ${self.investment}.')
-        print(f'\nYour cash on cash ROI is {int(self.coc_roi) + round(self.coc_roi % 1, 2)}%.\n')
+        print(f'\nYour cash on cash ROI is {self.coc_roi}%.\n')
 
     def view_results(self):
         '''View income, expenses, cash flow, ivestments, and cash on cash ROI.'''
@@ -113,15 +115,15 @@ class Rental_roi():
         print(f'\nYour total monthly income is ${self.monthly_income}.')
         print(f'\nYour total monthly expenses are ${self.monthly_expenses}.')
         print(f'\nYour total monthly cash flow is ${self.monthly_cf} and your yearly cash flow '
-        f'is ${self.annual_cf}.')
+            f'is ${self.annual_cf}.')
         print(f'\nYour total investments are ${self.investment}.')
-        print(f'\nYour cash on cash ROI is {int(self.coc_roi) + round(self.coc_roi % 1, 2)}%.\n')
+        print(f'\nYour cash on cash ROI is {self.coc_roi}%.\n')
     
     def edit_input(self):
         '''Allow user to change their inputs in income, expenses, investments (in cash on cash).'''
 
         choice = input('\nWhich category would you like to edit? Type "income", "expenses", or '
-        '"investments".\n')
+            '"investments".\n')
         choice = choice.lower()
         while choice not in ['income', 'expenses', 'investments']:
             choice = input('\nPlease type "income", "expenses", or "investments".\n')
@@ -158,11 +160,14 @@ def rental_roi_calc():
     rental.cash_on_cash()
 
     while True:
-        choice = input('\nTo view your results again, type "view".  To edit your inputs and recalculate '
-        'your results, type "edit", then type "view" to see your updated results. To exit this program, type "exit".\n')
+        choice = input(
+            '\n\t- To edit your inputs, type "edit".'
+            '\n\t- To view your new results or to view your results again, type "view".'
+            '\n\t- To exit this program, type "exit".\n\n')
         choice = choice.lower()
+
         while choice not in ['view', 'edit', 'exit']:
-             choice = input('\nPlease type "view", "edit", or "exit".')
+             choice = input('\nPlease type "view", "edit", or "exit".\n\n')
 
         if choice.lower() == 'view':
             rental.view_results()    
