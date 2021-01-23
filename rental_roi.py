@@ -109,8 +109,7 @@ class Rental_roi():
         '''Allow user to change their inputs in income, expenses, investments (in cash on cash).'''
 
         choice = input('\nWhich category would you like to edit? Type "income", "expenses", or '
-            '"investments".\n')
-        choice = choice.lower()
+            '"investments".\n').lower()
         while choice not in ['income', 'expenses', 'investments']:
             choice = input('\nPlease type "income", "expenses", or "investments".\n')
 
