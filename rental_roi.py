@@ -44,6 +44,7 @@ class Rental_roi():
 
         tax = self.__user_prompt('monthly tax', 'expense')
         insurance = self.__user_prompt('monthly insurance', 'expense')
+        
         utilities = input('\nDo you have any utility expenses? Type "yes" or "no".\n').lower()
         while utilities not in ['yes','no']:
             utilities = input('\nPlease type "yes" or "no".\n').lower()
@@ -55,7 +56,9 @@ class Rental_roi():
             gas = self.__user_prompt("monthly gas", "expense")
         elif utilities == 'no':
             electricity, water, sewer, garbage, gas = 0, 0, 0, 0, 0
+        
         hoa = self.__user_prompt("monthly homeowner's association", "expense")
+        
         lawn_snow = input('\nDo you have any lawncare or snow expenses? Type "yes" or ' 
             '"no".\n').lower()
         while lawn_snow not in ['yes','no']:
@@ -65,6 +68,7 @@ class Rental_roi():
             snow = self.__user_prompt("monthly snow", "expense")
         elif lawn_snow == 'no':
             lawn, snow = 0, 0
+        
         vacancy = self.__user_prompt("monthly vacancy", "expense")
         repairs = self.__user_prompt("monthly repairs", "expense")
         capital_exp = self.__user_prompt("monthly capital expenditure", "expense")
