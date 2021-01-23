@@ -34,7 +34,7 @@ class Rental_roi():
     def income(self):
         '''Ask for sources of income and calculate total income.'''
 
-        rental = self.user_prompt("rental", "income")
+        rental = self.user_prompt("monthly rental", "income")
         other_income = input('\nDo you have any laundry, storage, or miscellaneous expenses? Type '
             '\'yes\' or \'no\'.\n')
         if other_income.lower() == 'yes':
@@ -139,11 +139,11 @@ class Rental_roi():
             self._recalculate()
     
     def _recalculate(self):
-            '''Recalculate monthly cash flow, annual cash flow, and cash on cash ROI.'''
+        '''Recalculate monthly cash flow, annual cash flow, and cash on cash ROI.'''
 
-            self.monthly_cf = self.monthly_income - self.monthly_expenses
-            self.annual_cf = self.monthly_cf * 12
-            self.coc_roi = self.annual_cf / self.investment * 100
+        self.monthly_cf = self.monthly_income - self.monthly_expenses
+        self.annual_cf = self.monthly_cf * 12
+        self.coc_roi = self.annual_cf / self.investment * 100
 
 def rental_roi_calc():
     '''
