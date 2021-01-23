@@ -98,7 +98,7 @@ class Rental_roi():
 
         self.investment = sum([down_payment, closing_cost, rehab, misc])
         # calculate cash on cash ROI in percent form (no percent sign) with two decimal places 
-        self.coc_roi = round(self.annual_cf / self.investment * 100, 2)
+        self.coc_roi = '{0:.2f}'.format(self.annual_cf / self.investment * 100)
 
         print('\n' + '-'*35 + f'\nYour total investments are ${self.investment}.' '\n' + '-'*35)
         print('\n' + '*'*41 + f'\n    Your cash on cash ROI is {self.coc_roi}%.     \n' + '*'*41)
@@ -150,7 +150,7 @@ class Rental_roi():
 
         self.monthly_cf = self.monthly_income - self.monthly_expenses
         self.annual_cf = self.monthly_cf * 12
-        self.coc_roi = self.annual_cf / self.investment * 100
+        self.coc_roi = '{0:.2f}'.format(self.annual_cf / self.investment * 100)
 
 def rental_roi_calc():
     '''
