@@ -23,8 +23,8 @@ class Rental_roi():
         rental = self.__user_input("monthly rental", "income")
         
         # give user option to input income from laundry, storage, or miscellaneous sources
-        other_income = input('\nDo you have any income from laundry, storage, or miscellaneous sources? Type '
-            '\'yes\' or \'no\'.\n').lower()
+        other_income = input('\nDo you have any income from laundry, storage, or miscellaneous' 
+            'sources? Type \'yes\' or \'no\'.\n').lower()
         while other_income not in ['yes','no']:
             other_income = input('\nPlease type "yes" or "no".\n').lower()
         if other_income == 'yes':
@@ -39,8 +39,8 @@ class Rental_roi():
         # calculate length of number in string form for formatting purposes
         len_inc = len(str(self.monthly_income))
         # print monthly income with dashes above and below matching statement length
-        print('\n' + '-'*(31 + len_inc + (len_inc - 1)//3) + '\nYour total monthly income is $' + format(self.monthly_income, ',')
-            + '.\n' + '-'*(31 + len_inc + (len_inc - 1)//3))
+        print('\n' + '-'*(31 + len_inc + (len_inc - 1)//3) + '\nYour total monthly income is $' + 
+            format(self.monthly_income, ',') + '.\n' + '-'*(31 + len_inc + (len_inc - 1)//3))
 
     def expenses(self):
         '''Ask user to input various expenses. Calculate and print total expenses.'''
