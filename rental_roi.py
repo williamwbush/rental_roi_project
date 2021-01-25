@@ -106,7 +106,7 @@ class Rental_roi():
 
     def cash_on_cash(self):
         '''Ask user to input various investments. Calculate and print total investments and 
-        cash on cash ROI.'''
+        a summary of results with cash on cash ROI.'''
         
         print('\nLet\'s look at your investments.')
 
@@ -119,14 +119,13 @@ class Rental_roi():
          # calculate cash on cash ROI in percent form (no percent sign) with two decimal places 
         self.coc_roi = format(self.annual_cf / self.investment * 100, ',.2f')
 
-        # calculate length of numbers in string form for formatting purposes
+        # calculate length of number in string form for formatting purposes
         len_i = len(str(self.investment))
-        len_roi = len(str(self.coc_roi))
-        # print investments and ROI with dashes/stars above and below matching statement lengths
+        # print investments with dashes/stars above and below matching statement lengths
         print('\n' + '-'*(29 + len_i + (len_i - 1)//3) + '\nYour total investments are $' + 
             format(self.investment, ',d') + '.\n' + '-'*(29 + len_i + (len_i - 1)//3))
-        print('\n' + '*'*(34 + len_roi) + '\n    Your cash on cash ROI is ' + self.coc_roi + 
-            '%.    \n' + '*'*(34 + len_roi))
+        
+        self.view_results()
 
     def view_results(self):
         '''Print income, expenses, monthly/annual cash flow, investments, and cash on cash ROI.'''
@@ -150,7 +149,8 @@ class Rental_roi():
             '%.    \n' + '*'*(34 + len_roi))
     
     def edit_input(self):
-        '''Allow user to change their inputs for income, expenses, or investments.'''
+        '''Allow user to change their inputs for income, expenses, or investments and view a
+        summary of updated results.'''
 
         choice = input('\nWhich category would you like to edit? Type "income", "expenses", or '
             '"investments".\n').lower()
@@ -160,12 +160,14 @@ class Rental_roi():
         if choice == 'income':
             self.income()
             self.__recalculate()
+            self.view_results()
         elif choice == 'expenses':
             self.expenses()
             self.__recalculate()
+            self.view_results()
         elif choice == 'investments':
-            self.cash_on_cash()
-            self.__recalculate()
+            self.cash_on_cash() 
+            # view_results is in cash_on_cash, no need to recalculate other categories
     
     def __user_input(self, input_name:str, input_type:str) -> int:
         '''Ask user to input a number for input_name input_type (e.g. laundry income).
@@ -200,8 +202,8 @@ def rental_roi_calc():
 
     while True:
         choice = input(
-            '\n\t- To view a summary of all results, type "view".'
-            '\n\t- To edit your inputs, type "edit".'
+            '\n\t- To edit your inputs and view updated results, type "edit".'
+            '\n\t- To view your results again, type "view".'
             '\n\t- To exit this program, type "exit".\n\n').lower()
 
         while choice not in ['view', 'edit', 'exit']:
