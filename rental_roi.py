@@ -39,7 +39,7 @@ class Rental_roi():
         # calculate length of number in string form for formatting purposes
         len_inc = len(str(self.monthly_income))
         # print monthly income with dashes above and below matching statement length
-        print('\n' + '-'*(31 + len_inc + (len_inc - 1)//3) + '\nYour total monthly income is $' + format(self.monthly_income, ',d')
+        print('\n' + '-'*(31 + len_inc + (len_inc - 1)//3) + '\nYour total monthly income is $' + format(self.monthly_income, ',')
             + '.\n' + '-'*(31 + len_inc + (len_inc - 1)//3))
 
     def expenses(self):
@@ -89,7 +89,7 @@ class Rental_roi():
         len_e = len(str(self.monthly_expenses))
         # print monthly expenses with dashes above and below matching statement length
         print('\n' + '-'*(34 + len_e + (len_e - 1)//3) + '\nYour total monthly expenses are $' + 
-            format(self.monthly_expenses, ',d') + '.\n' + '-'*(34 + len_e + (len_e - 1)//3))
+            format(self.monthly_expenses, ',') + '.\n' + '-'*(34 + len_e + (len_e - 1)//3))
     
     def cash_flow(self):
         '''Calculate and print total montly/annual cash flow from income and expenses.'''
@@ -101,8 +101,8 @@ class Rental_roi():
         len_cf = len(str(self.monthly_cf) + str(self.annual_cf))
         # print monthly/annual cash flow with dashes above and below matching statement length
         print('\n' + '-'*(64 + len_cf + (len_cf - 1)//3) + '\nYour total monthly cash flow is $' + 
-            format(self.monthly_cf, ',d') + ' and your annual cash flow is $' + 
-            format(self.annual_cf, ",d") + '.\n' + '-'*(64 + len_cf + (len_cf - 1)//3))
+            format(self.monthly_cf, ',') + ' and your annual cash flow is $' + 
+            format(self.annual_cf, ",") + '.\n' + '-'*(64 + len_cf + (len_cf - 1)//3))
 
     def cash_on_cash(self):
         '''Ask user to input various investments. Calculate and print total investments and 
@@ -123,18 +123,18 @@ class Rental_roi():
         len_i = len(str(self.investment))
         # print investments with dashes/stars above and below matching statement lengths
         print('\n' + '-'*(29 + len_i + (len_i - 1)//3) + '\nYour total investments are $' + 
-            format(self.investment, ',d') + '.\n' + '-'*(29 + len_i + (len_i - 1)//3))
+            format(self.investment, ',') + '.\n' + '-'*(29 + len_i + (len_i - 1)//3))
         
         self.view_results()
 
     def view_results(self):
         '''Print income, expenses, monthly/annual cash flow, investments, and cash on cash ROI.'''
         
-        inc = "{:,}".format(self.monthly_income)
-        e = "{:,}".format(self.monthly_expenses)
-        mcf = "{:,}".format(self.monthly_cf)
-        acf = "{:,}".format(self.annual_cf)
-        inv = "{:,}".format(self.investment)
+        inc = format(self.monthly_income, ',')
+        e = format(self.monthly_expenses, ',')
+        mcf = format(self.monthly_cf, ',')
+        acf = format(self.annual_cf, ',')
+        inv = format(self.investment, ',')
 
         # put dashes above/below results and right justify dollar amounts with periods before
         print('\n' + '-'*45 + '\nTotal monthly income' + '.'*(24 - len(inc)) + '$' + inc)
