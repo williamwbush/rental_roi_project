@@ -4,7 +4,7 @@ class Rental_roi():
                 investment=0, coc_roi=0):
         self.monthly_income = monthly_income
         self.monthly_expenses = monthly_expenses
-        self.monthly_cf = monthly_cf 
+        self.monthly_cf = monthly_cf
         self.annual_cf = annual_cf
         self.investment = investment
         self.coc_roi = coc_roi
@@ -34,8 +34,11 @@ class Rental_roi():
         
         self.monthly_income = sum([rental, laundry, storage, miscellaneous])
         
-        print('\n' + '-'*36 + f'\nYour total monthly income is ${self.monthly_income}.\n' + 
-            '-'*36)
+        # calculate length of number in string form for formatting purposes
+        len_inc = len(str(self.monthly_income))
+        # print monthly income with dashes above and below matching statement length
+        print('\n' + '-'*(31 + len_inc + (len_inc - 1)//3) + '\nYour total monthly income is $' + format(self.monthly_income, ',d')
+            + '.\n' + '-'*(31 + len_inc + (len_inc - 1)//3))
 
     def expenses(self):
         '''Ask for expenses and calculate total expenses.'''
@@ -78,17 +81,24 @@ class Rental_roi():
         self.monthly_expenses = sum([tax, insurance, electricity, water, sewer, garbage, gas, hoa,
             lawn, snow, vacancy, repairs, capital_exp, prop_man, mortgage])
         
-        print('\n' + '-'*39 + f'\nYour total monthly expenses are ${self.monthly_expenses}.\n' + 
-            '-'*39)
+        # calculate length of number in string form for formatting purposes
+        len_e = len(str(self.monthly_expenses))
+        # print monthly expenses with dashes above and below matching statement length
+        print('\n' + '-'*(34 + len_e + (len_e - 1)//3) + '\nYour total monthly expenses are $' + 
+            format(self.monthly_expenses, ',d') + '.\n' + '-'*(34 + len_e + (len_e - 1)//3))
     
     def cash_flow(self):
         '''Calculate total montly cash flow from monthly income and expenses.'''
 
         self.monthly_cf = self.monthly_income - self.monthly_expenses
         self.annual_cf = self.monthly_cf * 12
-        
-        print('\n' + '-'*75 + f'\nYour total monthly cash flow is ${self.monthly_cf} and your annual cash flow is '
-            f'${self.annual_cf}.' + '\n' + '-'*75)
+
+        # calculate length of numbers in string form for formatting purposes
+        len_cf = len(str(self.monthly_cf) + str(self.annual_cf))
+        # print monthly/annual cash flow with dashes above and below matching statement length
+        print('\n' + '-'*(64 + len_cf + (len_cf - 1)//3) + '\nYour total monthly cash flow is $' + 
+            format(self.monthly_cf, ',d') + ' and your annual cash flow is $' + 
+            format(self.annual_cf, ",d") + '.\n' + '-'*(64 + len_cf + (len_cf - 1)//3))
 
     def cash_on_cash(self):
         '''Ask for investments, calculate total investments, and calculate cash on cash ROI.'''
@@ -102,20 +112,37 @@ class Rental_roi():
 
         self.investment = sum([down_payment, closing_cost, rehab, misc])
         # calculate cash on cash ROI in percent form (no percent sign) with two decimal places 
-        self.coc_roi = '{0:.2f}'.format(self.annual_cf / self.investment * 100)
+        self.coc_roi = format(self.annual_cf / self.investment * 100, ',.2f')
 
-        print('\n' + '-'*35 + f'\nYour total investments are ${self.investment}.' '\n' + '-'*35)
-        print('\n' + '*'*41 + f'\n    Your cash on cash ROI is {self.coc_roi}%.     \n' + '*'*41)
+        # calculate length of numbers in string form for formatting purposes
+        len_i = len(str(self.investment))
+        len_roi = len(str(self.coc_roi))
+        # print investments and ROI with dashes/stars above and below matching statement lengths
+        print('\n' + '-'*(29 + len_i + (len_i - 1)//3) + '\nYour total investments are $' + 
+            format(self.investment, ',d') + '.\n' + '-'*(29 + len_i + (len_i - 1)//3))
+        print('\n' + '*'*(34 + len_roi) + '\n    Your cash on cash ROI is ' + self.coc_roi + 
+            '%.    \n' + '*'*(34 + len_roi))
 
     def view_results(self):
         '''View income, expenses, cash flow, ivestments, and cash on cash ROI.'''
+        
+        inc = "{:,}".format(self.monthly_income)
+        e = "{:,}".format(self.monthly_expenses)
+        mcf = "{:,}".format(self.monthly_cf)
+        acf = "{:,}".format(self.annual_cf)
+        inv = "{:,}".format(self.investment)
 
-        print('\n' + '-'*41 + f'\n- Your total monthly income is ${self.monthly_income}.')
-        print(f'\n- Your total monthly expenses are ${self.monthly_expenses}.')
-        print(f'\n- Your total monthly cash flow is ${self.monthly_cf}.')
-        print(f'\n- Your annual cash flow is ${self.annual_cf}.')
-        print(f'\n- Your total investments are ${self.investment}.' + '\n' + '-'*41)
-        print('\n' + '*'*41 + f'\n    Your cash on cash ROI is {self.coc_roi}%.     \n' + '*'*41)
+        # put dashes above/below results and right justify dollar amounts with periods before
+        print('\n' + '-'*45 + '\nTotal monthly income' + '.'*(24 - len(inc)) + '$' + inc)
+        print('\nTotal monthly expenses' + '.'*(22 - len(e)) + '$' + e)
+        print('\nTotal monthly cash flow' + '.'*(21 - len(mcf)) + '$' + mcf)
+        print('\nTotal annual cash flow' + '.'*(22 - len(acf)) + '$' + acf)
+        print('\nTotal investments' + '.'*(27 - len(inv)) + '$' + inv + '\n' + '-'*45)
+
+        # calculate length of number in string form for formatting purposes
+        len_roi = len(str(self.coc_roi))
+        print('\n' + '*'*(34 + len_roi) + '\n    Your cash on cash ROI is ' + self.coc_roi + 
+            '%.    \n' + '*'*(34 + len_roi))
     
     def edit_input(self):
         '''Allow user to change their inputs in income, expenses, investments (in cash on cash).'''
